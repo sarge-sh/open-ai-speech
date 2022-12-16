@@ -14,7 +14,7 @@ def SpeakText(command):
     os.system(".\\mpg123\\mpg123.exe" + " speak.mp3")
 
 
-openai.api_key = "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"
+openai.api_key = "OPEN-AI API KEY"
 while (1):
 
     try:
