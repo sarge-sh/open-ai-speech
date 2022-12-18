@@ -1,18 +1,24 @@
 import speech_recognition as sr
 from gtts import gTTS
 import openai
-import os
+from io import BytesIO
 import time
+import pygame
 
 r = sr.Recognizer()
 
 def SpeakText(command):
-    # Initialize the engine
+
     tts = gTTS(text=command, lang='cs')
     tts.save("speak.mp3")
-    time.sleep(2)
-    os.system(".\\mpg123\\mpg123.exe" + " speak.mp3")
+    pygame.mixer.pre_init()
+    pygame.mixer.init()
 
+    # mixer.music.load("speak.mp3")
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound('speak.mp3'))
+    # os.system("mpg123" + " speak.mp3")
+    while pygame.mixer.Channel(0).get_busy():
+        _ = 1
 
 openai.api_key = "OPEN-AI API-KEY"
 while (1):
